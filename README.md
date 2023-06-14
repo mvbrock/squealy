@@ -1,3 +1,7 @@
-# Clusterizer
+# Squealy
 
-A scalable streaming cluster analysis command line tool. It pulls data off of a Kafka topic and puts cluster centers onto another Kafka topic. Scaling the throughput is accomplished by connecting more workers to the initial worker using [ZeroMQ's gossip protocol](http://czmq.zeromq.org/czmq4-0:zgossip).
+A scalable streaming SQL query engine. Uses:
+
+* [ZeroMQ's gossip protocol](http://czmq.zeromq.org/czmq4-0:zgossip) for clustering
+* [Hyrise's SQL parser](https://github.com/hyrise/sql-parser) for SQL parsing
+* [RocksDB](https://github.com/facebook/rocksdb) for data persistence
