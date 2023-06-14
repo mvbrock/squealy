@@ -6,6 +6,8 @@ ZEROMQ_BASE=/opt/homebrew/Cellar/zeromq/4.3.4
 ZEROMQ_INC=$(ZEROMQ_BASE)/include
 ZEROMQ_LIB=$(ZEROMQ_BASE)/lib
 
+FLAGS = -std=c++20 -stdlib=libc++
+GXX = g++ $(FLAGS)
 SRC = $(wildcard src/*.cpp)
 OBJ = $(patsubst src/%.cpp, obj/%.o, $(SRC))
 INC = -I $(ZEROMQ_INC) -I $(CZMQ_INC)
@@ -14,13 +16,13 @@ LIBS = -lzmq -lczmq
 
 bin/squealy: $(OBJ)
 	mkdir -p bin
-	g++ -o $@ $? $(LIBDIR) $(LIBS)
+	$(GXX) -o $@ $? $(LIBDIR) $(LIBS)
 
 obj/%.o: src/%.cpp
 	mkdir -p obj
-	g++ -o $@ -c $< $(INC)
+	$(GXX) -o $@ -c $< $(INC)
 
 .PHONY: clean
 clean:
-	rm obj/*
-	rm bin/squealy
+	rm -f obj/*
+	rm -f bin/squealy
